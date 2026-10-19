@@ -1,0 +1,51 @@
+# How can we check whether a string of parentheses and brackets is balanced?
+def check(expression):
+    stack = []
+    charMap = {
+        ")": "(",
+        "}": "{",
+        "]": "[",
+    }
+    for i in expression:
+        if i not in "()[]{}":
+            continue
+        
+        if i not in charMap:
+            stack.append(i)
+        elif not stack or  stack.pop() != charMap[i]:
+            print("INVALID!!!!")
+            return
+    if not stack:
+        print("PASSED")
+    else:
+        print("INVALID !!!")
+            
+
+print("Welcome for Expression Validator! \nPress q to quit")
+while True:
+    exp = input("Enter the Expression: ")
+    
+    if exp == "q":
+        break
+    check(exp)
+    
+
+"""
+python parenthesis_checker.py 
+Welcome for Expression Validator! 
+Press q to quit
+Enter the Expression: (){}
+PASSED
+Enter the Expression: {{(
+INVALID !!!
+Enter the Expression: {})
+INVALID!!!!
+"""
+
+"""
+1. Create an empty stack and a map from each closing bracket to its matching opening bracket.
+2. Scan the expression and ignore characters that are not brackets.
+3. Push opening brackets onto the stack.
+4. For each closing bracket, reject the expression if the stack is empty or its top does not match.
+5. Accept the expression only when the stack is empty after the scan.
+"""
